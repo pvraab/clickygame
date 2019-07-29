@@ -7,9 +7,6 @@ function ClickyCard(props) {
       <div className="img-container">
         <img alt={props.name} src={props.image} />
       </div>
-      <span onClick={() => props.removeClicky(props.id)} className="remove">
-        𝘅
-      </span>
     </div>
   );
 }
