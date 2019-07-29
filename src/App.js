@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import ClickyCard from "./components/ClickyCard";
 import Wrapper from "./components/Wrapper";
+import NavBar from "./components/NavBar";
 import Title from "./components/Title";
 import Footer from "./components/Footer";
 import clickys from "./clickys.json";
 
 class App extends Component {
-
   // Setting this.state.clickys to the clickys json array
   constructor() {
-    super()
+    super();
     this.state = {
       clickys: clickys,
+      navMessage: "Click an image to begin!",
       score: 0,
       topscore: 0,
       footerTitle: "Copyright \u00A9 2019 Paul Raab"
@@ -30,6 +31,7 @@ class App extends Component {
     });
     alert(`Game Over :( \nscore: ${this.state.score}`);
     this.setState({ score: 0 });
+    this.setState({navMessage: "Click an image to begin!"})
     return true;
   };
 
@@ -45,8 +47,9 @@ class App extends Component {
 
       // Randomize cards for next choice
       this.state.clickys.sort(() => Math.random() - 0.5);
+      this.setState({navMessage: "You guessed correctly!"});
       return true;
-    } 
+    }
     // Clicked on a previously selected choice - game over
     else {
       this.gameOver();
@@ -96,6 +99,7 @@ class App extends Component {
   render() {
     return (
       <Wrapper>
+        <NavBar navMessage={this.state.navMessage} score={this.state.score} topscore={this.state.topscore} />
         <Title score={this.state.score} topscore={this.state.topscore} />
         <Wrapper>
           {this.state.clickys.map(clicky => (
